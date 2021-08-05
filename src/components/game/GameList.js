@@ -12,6 +12,9 @@ export const GameList = (props) => {
 
     return (
         <article className="games">
+            <button onClick={
+                () => history.push("/games/create")
+            }>Create Game</button>
             {
                 games.map(game => {
                     return <section key={`game--${game.id}`} className="game">

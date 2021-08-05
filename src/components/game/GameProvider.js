@@ -15,8 +15,30 @@ export const GameProvider = (props) => {
         .then(setGames)
     }
 
+    const getGameById = gameId => {
+        return fetch(`http://localhost:8000/games/${gameId}`, {
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("lu_token")}`
+            }
+        })
+        .then(res => res.json())
+    }
+
+    const createGame = (game) => {
+        return fetch("http://localhost:8000/games", {
+            method: "POST", 
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("lu_token")}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(game)
+        })
+        .then(res => res.json())
+        .then(getGames)
+    }
+
     return (
-        <GameContext.Provider value={{ games, getGames }} >
+        <GameContext.Provider value={{ games, getGames, getGameById, createGame }} >
             {props.children}
         </GameContext.Provider>
     )
