@@ -9,12 +9,14 @@ export const GameList = (props) => {
     useEffect(() => {
         getGames()
     }, [])
-
+    
+    console.log(games)
     return (
         <article className="games">
             <button onClick={
                 () => history.push("/games/create")
             }>Create Game</button>
+            <br />
             {
                 games.map(game => {
                     return <section key={`game--${game.id}`} className="game">
@@ -26,6 +28,7 @@ export const GameList = (props) => {
                             </button>
                         </div>
                         <div className="game__players">{game.number_of_players} players </div>
+                        <div>Category: {game.category.label} </div>
                         <br />
                     </section>
                 })

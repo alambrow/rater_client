@@ -1,11 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { GameContext } from "./GameProvider";
+import { CategoryContext } from "../cat/CategoryProvider";
 
 export const GameForm = () => {
     const history = useHistory()
     const [currentGame, setCurrentGame] = useState({})
     const { createGame } = useContext(GameContext)
+    const { getCategories, categories } = useContext(CategoryContext)
+
+    useEffect(() => {
+        getCategories()
+        console.log(categories)
+    }, [])
 
     const handleControlledInputChange = (event) => {
         const newGameState = { ...currentGame }
@@ -31,7 +38,7 @@ export const GameForm = () => {
             </fieldset>
             <fieldset>
                 <label>Number of Players</label>
-                <input type="int" name="number_of_players" onChange={handleControlledInputChange} required />
+                <input type="number" min="0" name="number_of_players" onChange={handleControlledInputChange} required />
             </fieldset>
             <fieldset>
                 <label>Estimated Time</label>
@@ -40,6 +47,16 @@ export const GameForm = () => {
             <fieldset>
                 <label>Age Recommendation:</label>
                 <input type="text" name="age_rec" onChange={handleControlledInputChange} required placeholder="Age recommendation" />
+            </fieldset>
+            <fieldset>
+                <label>Pick a Category</label>
+                <select name="category" onChange={handleControlledInputChange}>
+                    {
+                        categories?.map(cat =>
+                            <option value={cat.id}>{cat.label}</option>
+                        )
+                    }
+                </select>
             </fieldset>
             <br />
             <button onClick={event => {
@@ -51,7 +68,8 @@ export const GameForm = () => {
                     designer: currentGame.designer,
                     number_of_players: currentGame.number_of_players,
                     est_time: currentGame.est_time,
-                    age_rec: currentGame.age_rec
+                    age_rec: currentGame.age_rec,
+                    category: currentGame.category
                 }
 
                 createGame(game)
