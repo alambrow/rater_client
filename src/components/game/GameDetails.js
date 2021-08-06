@@ -8,6 +8,7 @@ export const GameDetail = () => {
     const { getGameById } = useContext(GameContext)
     const [ remoteGame, setRemoteGame ] = useState([])
     const { gameId } = useParams()
+    const history = useHistory()
 
     useEffect(() => {
         // getGameById
@@ -16,9 +17,12 @@ export const GameDetail = () => {
             
         })
     }, [gameId])
-    console.log(remoteGame)
+    
     return (
         <>
+        <button onClick={() => {
+            history.push(`/games/${gameId}/review`)
+        }}>Review Game</button>
         <div>{remoteGame.title}</div>
         <div>{remoteGame.description}</div>
         <div>{remoteGame.designer}</div>
