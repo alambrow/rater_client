@@ -1,0 +1,30 @@
+.title__box {
+    border: 1px black solid;
+    background-color: rgb(245, 122, 100);
+    color: whitesmoke;
+}
+
+.review__box {
+    border: 1px black solid;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    background-color: rgb(71, 135, 255);
+    color: whitesmoke;
+}
+
+.rating__box {
+    border: 1px black solid;
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+    justify-content: center;
+    background-color: rgb(252, 78, 47);
+    color: whitesmoke;
+}
+
+.button__box {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}

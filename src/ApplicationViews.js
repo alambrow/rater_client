@@ -7,6 +7,7 @@ import { GameForm } from "./components/game/GameForm"
 import { CategoryProvider } from "./components/cat/CategoryProvider"
 import { ReviewForm } from "./components/game/ReviewForm"
 import { ReviewProvider } from "./components/game/ReviewProvider"
+import { RatingProvider } from "./components/game/RatingProvider"
 
 export const ApplicationViews = () => {
     return <>
@@ -14,24 +15,26 @@ export const ApplicationViews = () => {
         <GameProvider>
             <CategoryProvider>
                 <ReviewProvider>
-                    <Route exact path="/">
-                        <h1>home</h1>
-                    </Route>
-                    <Route exact path="/games">
-                        <GameList />
-                    </Route>
-                    <Route exact path="/games/:gameId(\d+)">
-                        <GameDetail />
-                    </Route>
-                    <Route exact path="/games/create">
-                        <GameForm />
-                    </Route>
-                    <Route exact path="/games/:gameId(\d+)/review">
-                        <ReviewForm />
-                    </Route>
-                    <Route exact path="/categories">
-                        <h1>Categories</h1>
-                    </Route>
+                    <RatingProvider>
+                        <Route exact path="/">
+                            <h1>home</h1>
+                        </Route>
+                        <Route exact path="/games">
+                            <GameList />
+                        </Route>
+                        <Route exact path="/games/:gameId(\d+)">
+                            <GameDetail />
+                        </Route>
+                        <Route exact path="/games/create">
+                            <GameForm />
+                        </Route>
+                        <Route exact path="/games/:gameId(\d+)/review">
+                            <ReviewForm />
+                        </Route>
+                        <Route exact path="/categories">
+                            <h1>Categories</h1>
+                        </Route>
+                    </RatingProvider>
                 </ReviewProvider>
             </CategoryProvider>
         </GameProvider>

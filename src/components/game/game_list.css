@@ -1,0 +1,12 @@
+.games__box {
+    border: 1px black solid;
+    background-color: tomato;
+}
+
+.game__title {
+    background-color: whitesmoke;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px black solid;
+    border-radius: 10px;
+}

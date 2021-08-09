@@ -1,37 +1,38 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import Nav from 'react-bootstrap/Nav'
 
 
 export const NavBar = (props) => {
     return (
-        <ul className="navbar">
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/">Home</Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/games">Games</Link>
-            </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/categories">Categories</Link>
-            </li>
-            {
-                (localStorage.getItem("lu_token") !== null) ?
-                    <li className="nav-item">
-                        <button className="nav-link fakeLink"
-                            onClick={() => {
-                                localStorage.removeItem("lu_token")
-                                props.history.push({ pathname: "/" })
-                            }}
-                        >Logout</button>
-                    </li> :
-                    <>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Register</Link>
-                        </li>
-                    </>
-            }        </ul>
+        <>
+        <Nav variant="pills" defaultActiveKey="/">
+            <Nav.Item className="nav-item">
+                <Nav.Link eventKey="link-1" href="/">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="nav-item">
+                <Nav.Link eventKey="link-2" href="/games">Games</Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="nav-item">
+                <Nav.Link eventKey="link-3" href="/categories">Categories</Nav.Link>
+            </Nav.Item>
+                {
+                    (localStorage.getItem("lu_token") !== null) ?
+                        <Nav.Item className="nav-item">
+                            <Nav.Link className="nav-link fakeLink"
+                                onClick={() => {
+                                    localStorage.removeItem("lu_token")
+                                    props.history.push({ pathname: "/" })
+                                }}
+                            >Logout</Nav.Link>
+                        </Nav.Item> :
+                        <>
+                            <Nav.Item className="nav-item">
+                                <Nav.Link className="nav-link" to="/register">Register</Nav.Link>
+                            </Nav.Item>
+                        </>
+                } 
+            </Nav>
+            </>
     )
 }
