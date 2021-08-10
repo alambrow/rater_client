@@ -13,7 +13,7 @@ export const GameDetail = () => {
     const [ remoteGame, setRemoteGame ] = useState([])
     const [ remoteReviews, setRemoteReviews ] = useState([])
     const [ remoteRatings, setRemoteRatings ] = useState([])
-    const [ remoteAverage, setRemoteAverage ] = useState([])
+    const [ remoteAverage, setRemoteAverage ] = useState(0)
     const { gameId } = useParams()
     const history = useHistory()
 
@@ -30,21 +30,21 @@ export const GameDetail = () => {
         })
     }, [gameId])
 
-    useEffect(() => {
-        getRatingsByGameId(gameId).then((data) => {
-            setRemoteRatings(data)
-        })
-    }, [gameId])
+    // useEffect(() => {
+    //     getRatingsByGameId(gameId).then((data) => {
+    //         setRemoteRatings(data)
+    //     })
+    // }, [gameId])
     
-    useEffect(() => {
-        const length = remoteRatings.length
-        let total = 0
-        for (let i = 0; i < length; i++) {
-            total += remoteRatings[i].rating
-        }
-        const average = ( total / length)
-        setRemoteAverage(average)
-    }, [gameId, remoteRatings])
+    // useEffect(() => {
+    //     const length = remoteRatings.length
+    //     let total = 0
+    //     for (let i = 0; i < length; i++) {
+    //         total += remoteRatings[i].rating
+    //     }
+    //     const average = ( total / length)
+    //     setRemoteAverage(average)
+    // }, [gameId, remoteRatings])
 
     const registerRating = (ratNum) => {
         createRating({
@@ -82,7 +82,7 @@ export const GameDetail = () => {
         <div className="rating__box">
             Rate me!
             <br />
-            Average rating: {remoteAverage}
+            Average rating: {remoteGame.average_rating}
         <div className="button__box">
             <ButtonGroup aria-label="rating toolbar">
                 <Button variant="primary" onClick={(event) => {
